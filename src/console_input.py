@@ -8,12 +8,15 @@ from typing import List
 
 from .matrix import Matrix
 
-
 def read_mode() -> str:
-    # TODO: 04 §10: 입력 방식 선택("1" 사용자 입력 3×3, "2" data.json 분석, "3" 패턴 생성기(09 §0-5)), 그 외 입력은 재입력
-    raise NotImplementedError("TODO: read_mode")
-
-
+    # 04 §10: 입력 방식 선택("1" 사용자 입력 3×3, "2" data.json 분석, "3" 패턴 생성기(09 §0-5)), 그 외 입력은 재입력
+    print("입력 방식 선택: 1. 사용자 입력 3×3, 2. data.json 분석, 3. 패턴 생성기")
+    while True:
+        choice = input("선택: ")
+        if choice.strip() in ["1", "2", "3"]:
+            return choice.strip()
+        print("잘못된 입력입니다. 다시 선택해주세요.")
+    
 def parse_row(line: str, n: int) -> List[float]:
     # TODO: 04 §2: 공백 구분 숫자 n개를 float로 반환, 열 수 불일치·숫자 파싱 실패·NaN/Infinity는 오류(09 §6-5)
     raise NotImplementedError("TODO: parse_row")

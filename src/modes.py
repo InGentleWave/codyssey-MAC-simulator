@@ -10,6 +10,7 @@ from .matrix import Matrix
 
 
 def run_user_mode() -> None:
+    """사용자 입력 모드 실행"""
     # TODO: 04 §10: 필터 A, B 입력 → 저장 확인 → 패턴 입력 → MAC 연산 → 결과 판정 → 성능 분석(3×3) 출력
     raise NotImplementedError("TODO: run_user_mode")
 
