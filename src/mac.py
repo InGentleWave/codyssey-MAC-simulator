@@ -9,12 +9,25 @@ from .matrix import Matrix
 
 
 def mac(pattern: Matrix, filt: Matrix) -> float:
-    # TODO: 04 §5: 위치별 곱의 합을 float로 반환, 외부 라이브러리 없이 반복문으로 직접 구현(09 §6-1)
-    # TODO: 09 §5: 두 행렬 크기가 다르면 ValueError
-    raise NotImplementedError("TODO: mac")
+    # 04 §5: 위치별 곱의 합을 float로 반환, 반복문으로 직접 구현(09 §6-1)
+    if pattern.size != filt.size:
+        raise ValueError(
+            f"크기 불일치: 패턴 {pattern.size}×{pattern.size}, 필터 {filt.size}×{filt.size}"
+        )
+    n = pattern.size
+    total = 0.0  # 0.0에서 시작해 정수 입력이어도 결과는 float
+    # 누적 순서는 행 우선으로 고정한다(B1의 mac_flat과 결과가 같아야 함)
+    for i in range(n):
+        for j in range(n):
+            total += pattern.get(i, j) * filt.get(i, j)
+    return total
 
 
 def mac_flat(a: List[float], b: List[float]) -> float:
-    # TODO: 05 §1: 1차원 리스트 MAC, 같은 입력에서 mac()과 결과 완전 일치(09 §0-7)
-    # TODO: 09 §5: 두 리스트 길이가 다르면 ValueError
-    raise NotImplementedError("TODO: mac_flat")
+    # 05 §1: 1차원 리스트 MAC, 같은 입력에서 mac()과 결과 완전 일치(09 §0-7)
+    if len(a) != len(b):
+        raise ValueError(f"길이 불일치: {len(a)}, {len(b)}")
+    total = 0.0
+    for k in range(len(a)):
+        total += a[k] * b[k]
+    return total

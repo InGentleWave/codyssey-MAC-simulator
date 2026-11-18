@@ -13,6 +13,7 @@ X = "X"
 UNDECIDED = "UNDECIDED"
 
 # 별칭표: 외부 표기 → 표준 라벨(09 §5: 이 파일 한 곳에서만 관리)
+# 키는 공백을 지우고 소문자로 바꾼 형태로 둔다.
 LABEL_ALIASES: Dict[str, str] = {
     "+": CROSS,
     "cross": CROSS,
@@ -25,5 +26,10 @@ class LabelError(ValueError):
 
 
 def normalize_label(raw: Any) -> str:
-    # TODO: 04 §4: '+'·'cross' → Cross, 'x' → X(앞뒤 공백·대소문자 무시), 그 외는 LabelError
-    raise NotImplementedError("TODO: normalize_label")
+    # 04 §4: '+'·'cross' → Cross, 'x' → X(앞뒤 공백·대소문자 무시), 그 외는 LabelError
+    if not isinstance(raw, str):
+        raise LabelError(f"라벨이 문자열이 아님({raw!r})")
+    key = raw.strip().lower()
+    if key not in LABEL_ALIASES:
+        raise LabelError(f"알 수 없는 라벨({raw!r})")
+    return LABEL_ALIASES[key]
